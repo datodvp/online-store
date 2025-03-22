@@ -2,4 +2,34 @@
 
 * {
   box-sizing: border-box;
+  color: rgb(43, 39, 39);
+}
+
+@layer base {
+  .bg-primary {
+    background-color: #47d1d1;
+  }
+}
+
+@layer components {
+  .bottom-line {
+    display: inline-block;
+    margin: 0;
+  }
+  .bottom-line:after {
+    display: block;
+    content: '';
+    border-bottom: solid 2px #3b4246;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+  }
+  .bottom-line:hover:after {
+    transform: scaleX(1);
+  }
+  .bottom-line.fromRight:after {
+    transform-origin: 100% 50%;
+  }
+  .bottom-line.fromLeft:after {
+    transform-origin: 0% 50%;
+  }
 }

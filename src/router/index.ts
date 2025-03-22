@@ -16,12 +16,12 @@ const router = createRouter({
       component: CartView,
     },
     {
-      path: '/category/:id',
+      path: '/category/:slug',
       name: 'category',
       component: () => import('@/views/CategoryView.vue'),
     },
     {
-      path: '/product/:id',
+      path: '/product/:slug',
       name: 'product',
       component: () => import('@/views/ProductView.vue'),
     },
