@@ -2,6 +2,7 @@
 import { useProductsStore } from '@/stores/products'
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
+import ProductList from '@/components/ProductList/ProductList.vue'
 
 const store = useProductsStore()
 const { products } = storeToRefs(store)
@@ -13,9 +14,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main>
-    <div v-for="product in products" :key="product.id">
-      <h2>{{ product.name }}</h2>
-    </div>
-  </main>
+  <section class="flex justify-center">
+    <ProductList :products="products" />
+  </section>
 </template>
