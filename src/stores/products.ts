@@ -8,9 +8,15 @@ import { ref } from 'vue'
 export const useProductsStore = defineStore('products', () => {
   const products = ref<IProduct[]>([])
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (categoryId?: number) => {
+    let query: string = ''
+    if (categoryId) {
+      query = '/products?categories=' + categoryId
+    } else {
+      query = '/products'
+    }
     try {
-      const response: AxiosResponse<IResponseData<IProduct>> = await axiosInstance.get('/products')
+      const response: AxiosResponse<IResponseData<IProduct>> = await axiosInstance.get(query)
       products.value = response.data.items
     } catch (error) {
       console.error('Failed to fetch products', error)

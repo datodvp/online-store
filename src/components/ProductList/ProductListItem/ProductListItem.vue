@@ -10,7 +10,9 @@ const props = defineProps<props>()
 const { product } = props
 </script>
 <template>
-  <section class="w-72 cursor-pointer hover:shadow-lg rounded-2xl border border-gray-200 p-4">
+  <section
+    class="w-72 h-[525px] cursor-pointer hover:shadow-lg rounded-2xl border border-gray-200 p-4"
+  >
     <img :src="product.imageUrl" :alt="product.name" />
     <h3>{{ product.name }}</h3>
     <p>{{ product.defaultDisplayedPriceFormatted }}</p>
