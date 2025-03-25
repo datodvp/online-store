@@ -9,7 +9,7 @@ const { products } = storeToRefs(store)
 const { fetchProducts } = store
 
 onMounted(() => {
-  fetchProducts()
+  // fetchProducts()
 })
 </script>
 

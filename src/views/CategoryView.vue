@@ -1,35 +1,31 @@
 <script setup lang="ts">
-import type { ICategory } from '@/models/common/types'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, onUnmounted, onUpdated } from 'vue'
 import { useRoute } from 'vue-router'
+import ProductList from '@/components/ProductList/ProductList.vue'
 import { useCategoriesStore } from '@/stores/categories'
 import { storeToRefs } from 'pinia'
-import { useProductsStore } from '@/stores/products'
-import ProductList from '@/components/ProductList/ProductList.vue'
 
 const route = useRoute()
-const slug = route.params.slug as string
-
-const productsStore = useProductsStore()
-const { products } = storeToRefs(productsStore)
-const { fetchProducts } = productsStore
-
-const currentCategory = ref<ICategory>()
 const store = useCategoriesStore()
-const { getCategoryBySlug } = store
+const { currentCategory } = storeToRefs(store)
 
 onMounted(() => {
-  currentCategory.value = getCategoryBySlug(slug)
-  fetchProducts()
+  store.setCurrentCategory(route.params.slug as string)
 })
 
-watch(currentCategory, () => {
-  fetchProducts(currentCategory.value?.id)
+onUpdated(() => {
+  store.setCurrentCategory(route.params.slug as string)
+})
+
+onUnmounted(() => {
+  store.clearCurrentCategory()
 })
 </script>
 
 <template>
   <section class="flex justify-center">
-    <ProductList :products="products" />
+    {{ route.params.slug }}
+    {{ currentCategory }}
+    <!-- <ProductList :products="products" /> -->
   </section>
 </template>
