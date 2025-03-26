@@ -3,12 +3,30 @@ import type { IProduct } from '@/models/common/types'
 import { useCartStore } from '@/stores/cart'
 import { Store } from 'lucide-vue-next'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
+import { toast } from 'vue3-toastify'
 
 const cartStore = useCartStore()
 const { products, totalPrice } = storeToRefs(cartStore)
+const router = useRouter()
 
 const handleRemove = (product: IProduct) => {
   cartStore.removeFromCart(product)
+}
+
+const handlePurchase = () => {
+  if (products.value.length) {
+    router.push('/success-purchase')
+  } else {
+    toast('There are not products in the basket!', {
+      theme: 'auto',
+      type: 'warning',
+      position: 'bottom-left',
+      autoClose: 2000,
+      hideProgressBar: true,
+      dangerouslyHTMLString: true,
+    })
+  }
 }
 </script>
 
@@ -45,9 +63,10 @@ const handleRemove = (product: IProduct) => {
             >Total Price: <span class="font-bold">{{ totalPrice.toFixed(2) }} €</span></span
           >
           <button
+            @click="handlePurchase"
             class="flex bg-primary h-min p-1 md:p-3 hover:bg-teal-300 cursor-pointer justify-center items-center"
           >
-            <Store /> Buy Now
+            <Store /> Purchase
           </button>
         </div>
       </div>

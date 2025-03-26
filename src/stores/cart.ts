@@ -62,6 +62,9 @@ export const useCartStore = defineStore('cart', () => {
       dangerouslyHTMLString: true,
     })
   }
+  function clearCart() {
+    products.value = []
+  }
 
-  return { products, totalPrice, totalProducts, addToCart, removeFromCart }
+  return { products, totalPrice, totalProducts, addToCart, removeFromCart, clearCart }
 })

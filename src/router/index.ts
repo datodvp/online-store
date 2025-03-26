@@ -25,17 +25,31 @@ const router = createRouter({
       name: 'products',
       component: () => import('@/views/ProductView.vue'),
     },
+    {
+      path: '/success-purchase',
+      name: 'success-purchase',
+      component: () => import('@/views/SuccessPurchaseView.vue'),
+      beforeEnter: (to, from, next) => {
+        if (from.name !== 'cart') {
+          next({ name: 'home' })
+        } else {
+          next()
+        }
+      },
+    },
   ],
 })
 
 router.beforeResolve((to, _, next) => {
   if (to.name) {
+    // @ts-expect-error this is imported into HTML DOM
     NProgress.start()
   }
   next()
 })
 
 router.afterEach(() => {
+  // @ts-expect-error this is imported into HTML DOM
   NProgress.done()
 })
 
