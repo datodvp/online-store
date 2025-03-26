@@ -7,3 +7,10 @@ import TheHeader from '@/components/TheHeader/TheHeader.vue'
   <TheHeader />
   <RouterView />
 </template>
+
+<style>
+#nprogress .bar {
+  background: #47d1d1;
+  height: 5px;
+}
+</style>

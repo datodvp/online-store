@@ -1,31 +1,46 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, onUpdated } from 'vue'
+import { onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import ProductList from '@/components/ProductList/ProductList.vue'
 import { useCategoriesStore } from '@/stores/categories'
 import { storeToRefs } from 'pinia'
+import { useProductsStore } from '@/stores/products'
 
 const route = useRoute()
-const store = useCategoriesStore()
-const { currentCategory } = storeToRefs(store)
+const categoriesStore = useCategoriesStore()
+const { currentCategory } = storeToRefs(categoriesStore)
+const productsStore = useProductsStore()
+const { products, error } = storeToRefs(productsStore)
 
 onMounted(() => {
-  store.setCurrentCategory(route.params.slug as string)
+  categoriesStore.setCurrentCategory(route.params.slug as string)
+  fetchProducts()
 })
 
-onUpdated(() => {
-  store.setCurrentCategory(route.params.slug as string)
-})
+watch(
+  () => route.params.slug,
+  (newSlug) => {
+    categoriesStore.setCurrentCategory(newSlug as string)
+    fetchProducts()
+  },
+)
 
 onUnmounted(() => {
-  store.clearCurrentCategory()
+  categoriesStore.clearCurrentCategory()
 })
+
+const fetchProducts = () => {
+  if (currentCategory.value) {
+    productsStore.fetchProducts(currentCategory.value.id)
+  }
+}
 </script>
 
 <template>
-  <section class="flex justify-center">
-    {{ route.params.slug }}
-    {{ currentCategory }}
-    <!-- <ProductList :products="products" /> -->
-  </section>
+  <div>
+    <div v-if="error">{{ error }}</div>
+    <section class="flex justify-center">
+      <ProductList :products="products" />
+    </section>
+  </div>
 </template>

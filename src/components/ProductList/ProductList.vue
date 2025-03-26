@@ -11,7 +11,7 @@ const props = defineProps<props>()
 </script>
 
 <template>
-  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center my-20">
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center my-5">
     <div v-for="product in products" :key="product.id">
       <ProductListItem :product="product" />
     </div>

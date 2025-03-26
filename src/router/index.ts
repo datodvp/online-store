@@ -28,4 +28,15 @@ const router = createRouter({
   ],
 })
 
+router.beforeResolve((to, _, next) => {
+  if (to.name) {
+    NProgress.start()
+  }
+  next()
+})
+
+router.afterEach(() => {
+  NProgress.done()
+})
+
 export default router

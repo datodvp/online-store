@@ -2,12 +2,15 @@
 
 * {
   box-sizing: border-box;
-  color: rgb(43, 39, 39);
 }
 
 @layer base {
   .bg-primary {
     background-color: #47d1d1;
+  }
+
+  .text-primary {
+    color: #3da0a0;
   }
 }
 

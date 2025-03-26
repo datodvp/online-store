@@ -23,7 +23,7 @@ const { currentCategory } = storeToRefs(store)
       </div>
     </section>
     <section class="py-3 text-5xl mb-5">
-      <div class="flex justify-between m-auto w-[80%]">
+      <div class="flex justify-between m-auto w-[80%] text-primary mt-5">
         {{ currentCategory?.name || 'Landing page' }}
       </div>
     </section>
