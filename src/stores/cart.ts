@@ -1,11 +1,14 @@
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 import type { IProduct } from '@/models/common/types'
 import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 
+const getLocalStorageCart = () =>
+  localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')!) : []
+
 export const useCartStore = defineStore('cart', () => {
-  const products = ref<IProduct[]>([])
+  const products = ref<IProduct[]>(getLocalStorageCart())
   const totalPrice = computed(() =>
     products.value.reduce(
       (accumulator, product) => accumulator + product.price * (product.total || 1),
@@ -65,6 +68,15 @@ export const useCartStore = defineStore('cart', () => {
   function clearCart() {
     products.value = []
   }
+
+  watch(
+    () => products.value,
+    (state) => {
+      // persist the whole state to the local storage whenever it changes
+      localStorage.setItem('cart', JSON.stringify(state))
+    },
+    { deep: true },
+  )
 
   return { products, totalPrice, totalProducts, addToCart, removeFromCart, clearCart }
 })
