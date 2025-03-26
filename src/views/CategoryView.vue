@@ -30,9 +30,7 @@ onUnmounted(() => {
 })
 
 const fetchProducts = () => {
-  if (currentCategory.value) {
-    productsStore.fetchProducts(currentCategory.value.id)
-  }
+  productsStore.fetchProducts(currentCategory?.value?.id)
 }
 </script>
 

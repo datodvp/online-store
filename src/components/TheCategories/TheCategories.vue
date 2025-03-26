@@ -1,17 +1,11 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { useCategoriesStore } from '@/stores/categories'
-import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 
 const store = useCategoriesStore()
 
 const { categories, isLoading } = storeToRefs(store)
-const { fetchCategories } = store
-
-onMounted(() => {
-  fetchCategories()
-})
 </script>
 
 <template>

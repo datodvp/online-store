@@ -7,15 +7,12 @@ import { ref } from 'vue'
 
 export const useProductsStore = defineStore('products', () => {
   const products = ref<IProduct[]>([])
-  const isLoading = ref(false)
+  const isLoading = ref(true)
   const error = ref<string | null>(null) // Added error state
 
   const fetchProducts = async (categoryId?: number): Promise<void> => {
-    // Explicit return type
-    isLoading.value = true
     error.value = null // Reset error state
     const query: string = categoryId ? `/products?categories=${categoryId}` : '/products'
-
     try {
       const response: AxiosResponse<IResponseData<IProduct>> = await axiosInstance.get(query)
       products.value = response.data.items

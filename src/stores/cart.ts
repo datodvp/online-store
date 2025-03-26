@@ -31,7 +31,7 @@ export const useCartStore = defineStore('cart', () => {
     toast('Product added to basket!', {
       theme: 'auto',
       type: 'success',
-      position: 'top-right',
+      position: 'bottom-left',
       autoClose: 1000,
       hideProgressBar: true,
       dangerouslyHTMLString: true,
@@ -56,7 +56,7 @@ export const useCartStore = defineStore('cart', () => {
     toast('Product removed from basket!', {
       theme: 'auto',
       type: 'success',
-      position: 'top-right',
+      position: 'bottom-left',
       autoClose: 1000,
       hideProgressBar: true,
       dangerouslyHTMLString: true,

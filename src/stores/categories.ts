@@ -8,13 +8,10 @@ import { ref } from 'vue'
 export const useCategoriesStore = defineStore('categories', () => {
   const categories = ref<ICategory[]>([])
   const currentCategory = ref<ICategory>()
-  const isLoading = ref(false)
-
-  const setIsLoading = (value: boolean) => {
-    isLoading.value = value
-  }
+  const isLoading = ref<boolean>(true)
 
   const fetchCategories = async () => {
+    isLoading.value = true
     try {
       const response: AxiosResponse<IResponseData<ICategory>> =
         await axiosInstance.get('/categories')
@@ -41,6 +38,5 @@ export const useCategoriesStore = defineStore('categories', () => {
     fetchCategories,
     setCurrentCategory,
     clearCurrentCategory,
-    setIsLoading,
   }
 })
