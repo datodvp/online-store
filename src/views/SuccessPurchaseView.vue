@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useCartStore } from '@/stores/cart'
 import { onMounted } from 'vue'
-import { storeToRefs } from 'pinia'
 
 const store = useCartStore()
 
