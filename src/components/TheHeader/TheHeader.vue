@@ -3,9 +3,13 @@ import { ShoppingCart } from 'lucide-vue-next'
 import TheCategories from '../TheCategories/TheCategories.vue'
 import { useCategoriesStore } from '@/stores/categories'
 import { storeToRefs } from 'pinia'
+import { useCartStore } from '@/stores/cart'
+import { RouterLink } from 'vue-router'
 
 const store = useCategoriesStore()
 const { currentCategory } = storeToRefs(store)
+const cartStore = useCartStore()
+const { products } = storeToRefs(cartStore)
 </script>
 
 <template>
@@ -17,12 +21,19 @@ const { currentCategory } = storeToRefs(store)
       </RouterLink>
     </section>
     <section class="bg-primary py-3">
-      <div class="flex justify-between m-auto w-[80%]">
+      <div class="flex justify-between m-auto w-[80%] relative">
         <TheCategories />
-        <ShoppingCart />
+        <RouterLink to="/cart">
+          <ShoppingCart class="z-10" />
+          <span
+            class="absolute top-[-10px] right-[-15px] bg-white rounded-full w-5 h-5 flex justify-center items-center"
+          >
+            {{ products.length }}
+          </span>
+        </RouterLink>
       </div>
     </section>
-    <section class="py-3 text-5xl mb-5">
+    <section class="py-3 sm:text-2xl md:text-3xl mb-5">
       <div class="flex justify-between m-auto w-[80%] text-primary mt-5">
         {{ currentCategory?.name || 'Landing page' }}
       </div>
