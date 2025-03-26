@@ -36,6 +36,7 @@ const handleRemove = (product: IProduct) => {
             </div>
           </section>
         </div>
+        <div v-if="!products.length">There are not products in the basket</div>
       </div>
 
       <div class="justify-end flex md:text-xl font-bold float-right gap-3">

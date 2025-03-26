@@ -16,8 +16,8 @@ const handleAddToCart = () => {
   cartStore.addToCart(product.value!)
 }
 
-onMounted(() => {
-  product.value = getProductBySlug(slug)
+onMounted(async () => {
+  product.value = await getProductBySlug(slug)
 })
 </script>
 
@@ -31,10 +31,7 @@ onMounted(() => {
         <span class="md:text-5xl text-2xl"> {{ product?.name }}</span>
         <div>
           <span class="font-bold">Product Details:</span>
-          <div
-            v-html="product?.description"
-            class="md:w-1/2 grid gap-2 border border-teal-300 p-3"
-          ></div>
+          <div v-html="product?.description" class="md:w-1/2 grid gap-2 p-3"></div>
         </div>
         <div class="flex gap-3 w-1/2 justify-between">
           <div>
@@ -43,7 +40,7 @@ onMounted(() => {
           </div>
           <div
             @click="handleAddToCart"
-            class="flex justify-center items-center gap-3 bg-primary p-4 cursor-pointer hover:bg-teal-300"
+            class="flex justify-center items-center h-20 gap-3 bg-primary p-4 cursor-pointer hover:bg-teal-300"
           >
             <ShoppingBasket /> Add To Cart
           </div>
