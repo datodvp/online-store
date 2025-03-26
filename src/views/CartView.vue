@@ -17,9 +17,7 @@ const handleRemove = (product: IProduct) => {
     <div class="md:flex gap-3 justify-between">
       <div>
         <div v-for="product in products" :key="product.id">
-          <section
-            class="justify-between h-[200px] md:h-[150px] cursor-pointer hover:shadow-lg border border-gray-200 p-4 flex"
-          >
+          <section class="justify-between h-[200px] md:h-[150px] border border-gray-200 p-4 flex">
             <div class="flex gap-1 md:gap-10">
               <img class="h-full" :src="product.imageUrl" :alt="product.name" />
               <div>
