@@ -23,7 +23,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <div class="w-[80%] m-auto md:flex sm:grid gap-10">
+    <div class="md:w-[80%] w-[95%] m-auto md:flex sm:grid gap-10">
       <div class="md:w-1/2">
         <img :src="product?.imageUrl" :alt="product?.name" />
       </div>

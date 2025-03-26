@@ -12,4 +12,5 @@ export interface IProduct {
   defaultDisplayedPriceFormatted: string
   imageUrl: string
   description: string
+  total?: number
 }
